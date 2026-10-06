@@ -1,0 +1,121 @@
+/* Cấu hình cơ bản */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Khung chứa chính */
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Khu vực nhập liệu */
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #4a90e2;
+}
+
+button#add-btn {
+    padding: 12px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button#add-btn:hover {
+    background-color: #357abd;
+}
+
+/* Danh sách hiển thị */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li:hover {
+    background-color: #fcfcfc;
+}
+
+/* Nút xóa trong mỗi dòng việc cần làm */
+.delete-btn {
+    background-color: #ff5e5e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.delete-btn:hover {
+    background-color: #e04848;
+}
+
+/* Khi công việc đã hoàn thành (sẽ dùng JS để thêm class này) */
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+/* Thêm/Sửa phần này để thân thiện với điện thoại hơn */
+button, .task-text {
+    cursor: pointer;
+    touch-action: manipulation; /* Tối ưu cho việc chạm */
+    -webkit-tap-highlight-color: transparent;
+}
+
+input[type="text"] {
+    font-size: 16px; /* Tránh việc iPhone tự động phóng to khi nhập liệu */
+}
+
+.container {
+    width: 90%; /* Trên mobile sẽ chiếm 90% chiều ngang */
+    margin: 20px auto;
+}
