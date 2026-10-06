@@ -26,7 +26,6 @@
       </div>
 
       <form id="auth-form" class="space-y-4">
-        <!-- Trường Tên (Chỉ hiện khi Đăng ký) -->
         <div id="name-field" class="hide">
           <label class="block text-sm font-medium text-gray-700 mb-1">Tên hiển thị</label>
           <input type="text" id="auth-name" placeholder="VD: Bố Tuấn, Mẹ Lan" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-300">
@@ -51,10 +50,8 @@
     </div>
   </div>
 
-  <!-- ỨNG DỤNG CHÍNH (Ẩn khi chưa đăng nhập) -->
+  <!-- ỨNG DỤNG CHÍNH -->
   <div id="main-app" class="hide w-full max-w-md h-full bg-[#FFF9F2] flex flex-col relative shadow-xl overflow-hidden">
-    
-    <!-- Header -->
     <header class="glass-effect pt-12 pb-4 px-6 flex justify-between items-center sticky top-0 z-20 border-b border-orange-100">
       <div class="flex items-center space-x-3">
         <img src="https://ui-avatars.com/api/?name=G&background=FDBA74&color=fff" class="w-10 h-10 rounded-full shadow-sm" alt="Logo">
@@ -65,16 +62,11 @@
       </div>
       <button class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600 relative">
         <i class="fa-regular fa-bell"></i>
-        <span class="absolute top-2 right-2 w-2 h-2 bg-red-400 rounded-full"></span>
       </button>
     </header>
 
-    <!-- Nội dung chính (Scrollable) -->
     <main class="flex-1 overflow-y-auto pb-24 relative" id="main-content">
-      
-      <!-- TAB: BẢNG TIN (FEED) -->
       <section id="tab-feed" class="p-4 space-y-6">
-        <!-- Form Đăng bài -->
         <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
           <textarea id="post-text" placeholder="Hôm nay nhà mình có gì vui?" class="w-full bg-gray-50 rounded-xl p-3 text-sm focus:outline-none resize-none" rows="2"></textarea>
           <div class="flex justify-between items-center mt-3">
@@ -84,21 +76,15 @@
             </label>
             <button id="btn-post" class="bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-700 transition">Đăng bài</button>
           </div>
-          <p id="upload-status" class="text-xs text-orange-500 mt-2 hidden">Đang tải ảnh lên...</p>
+          <p id="upload-status" class="text-xs text-orange-500 mt-2 hidden">Đang tải ảnh lên host miễn phí...</p>
         </div>
 
-        <!-- Danh sách bài đăng -->
-        <div id="posts-container" class="space-y-5">
-          <!-- Bài đăng sẽ được chèn vào đây bằng JS -->
-        </div>
+        <div id="posts-container" class="space-y-5"></div>
       </section>
 
-      <!-- TAB: TRÒ CHUYỆN (CHAT) -->
       <section id="tab-chat" class="hide p-4 h-full flex flex-col">
         <h2 class="text-xl font-bold mb-4 text-center">Trò chuyện Gia đình</h2>
-        <div id="chat-messages" class="flex-1 overflow-y-auto bg-white rounded-2xl shadow-sm p-4 space-y-3 mb-4 border border-gray-100">
-          <!-- Tin nhắn sẽ hiện ở đây -->
-        </div>
+        <div id="chat-messages" class="flex-1 overflow-y-auto bg-white rounded-2xl shadow-sm p-4 space-y-3 mb-4 border border-gray-100"></div>
         <div class="flex space-x-2">
           <input type="text" id="chat-input" placeholder="Nhắn tin..." class="flex-1 bg-white border border-gray-200 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-200 text-sm">
           <button id="btn-send-chat" class="w-10 h-10 bg-orange-400 text-white rounded-full flex items-center justify-center hover:bg-orange-500 shadow-md">
@@ -107,22 +93,16 @@
         </div>
       </section>
 
-      <!-- TAB: TRANG CÁ NHÂN (PROFILE) -->
       <section id="tab-profile" class="hide p-6">
         <div class="bg-white rounded-3xl p-6 text-center shadow-sm border border-gray-100">
           <img id="profile-avatar" src="https://ui-avatars.com/api/?name=User" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-orange-50 shadow-md">
           <h2 id="profile-name" class="text-2xl font-bold text-gray-800">Tên Thành Viên</h2>
           <p id="profile-email" class="text-gray-500 text-sm mb-6">email@gmail.com</p>
-          
-          <button id="btn-logout" class="w-full py-3 bg-red-50 text-red-500 font-semibold rounded-xl hover:bg-red-100 transition">
-            Đăng xuất
-          </button>
+          <button id="btn-logout" class="w-full py-3 bg-red-50 text-red-500 font-semibold rounded-xl hover:bg-red-100 transition">Đăng xuất</button>
         </div>
       </section>
-
     </main>
 
-    <!-- Bottom Navigation Bar -->
     <nav class="glass-effect absolute bottom-0 w-full px-6 py-4 flex justify-between items-center pb-8 rounded-t-3xl border-t border-orange-50">
       <button class="nav-btn active flex flex-col items-center text-orange-500 transition-colors" data-target="tab-feed">
         <i class="fa-solid fa-house text-xl mb-1"></i>
@@ -139,15 +119,12 @@
     </nav>
   </div>
 
-  <!-- FIREBASE SDK & LOGIC -->
   <script type="module">
-    // Nhúng Firebase SDK v10.8.0
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
-    // MÃ CẤU HÌNH FIREBASE CỦA BẠN (GIỮ NGUYÊN)
+    // Cấu hình Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCDNmV22B2V6UVnzLCPJt4NirKUUL0irmE",
       authDomain: "appgiadinh-e0208.firebaseapp.com",
@@ -158,20 +135,18 @@
       measurementId: "G-Y04YP2PW79"
     };
 
-    // Khởi tạo Firebase
+    // ImgBB API Key (Thay mã API miễn phí của bạn vào đây)
+    const IMGBB_API_KEY = "API_KEY_IMGBB_CỦA_BẠN";
+
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const storage = getStorage(app);
 
     let currentUser = null;
-    let isLoginMode = true; // Biến trạng thái: true = Đăng nhập, false = Đăng ký
+    let isLoginMode = true;
 
-    // --- DOM Elements ---
     const authScreen = document.getElementById('auth-screen');
     const mainApp = document.getElementById('main-app');
-    
-    // Auth UI Elements
     const authTitle = document.getElementById('auth-title');
     const nameField = document.getElementById('name-field');
     const authName = document.getElementById('auth-name');
@@ -182,7 +157,6 @@
     const authToggleBtn = document.getElementById('auth-toggle-btn');
     const authForm = document.getElementById('auth-form');
 
-    // Chuyển đổi giữa Đăng nhập và Đăng ký
     authToggleBtn.addEventListener('click', () => {
       isLoginMode = !isLoginMode;
       if (isLoginMode) {
@@ -191,18 +165,15 @@
         authBtn.innerText = "Vào nhà ngay";
         authPromptText.innerText = "Chưa có tài khoản?";
         authToggleBtn.innerText = "Đăng ký ngay";
-        authName.removeAttribute('required');
       } else {
         authTitle.innerText = "Tạo Tài Khoản";
         nameField.classList.remove('hide');
         authBtn.innerText = "Đăng ký thành viên";
         authPromptText.innerText = "Đã là thành viên?";
         authToggleBtn.innerText = "Đăng nhập";
-        authName.setAttribute('required', 'true');
       }
     });
 
-    // Xử lý Form Đăng ký / Đăng nhập
     authForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = authEmail.value;
@@ -212,12 +183,9 @@
       try {
         authBtn.innerText = "Đang xử lý...";
         if (isLoginMode) {
-          // Xử lý Đăng nhập
           await signInWithEmailAndPassword(auth, email, password);
         } else {
-          // Xử lý Đăng ký
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          // Cập nhật tên hiển thị
           await updateProfile(userCredential.user, { displayName: name });
         }
       } catch (error) {
@@ -226,67 +194,44 @@
       }
     });
 
-    // Xử lý Đăng xuất
-    document.getElementById('btn-logout').addEventListener('click', () => {
-      signOut(auth).catch((error) => console.error("Lỗi đăng xuất", error));
-    });
+    document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
 
-    // Lắng nghe trạng thái đăng nhập
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Đã đăng nhập
         currentUser = user;
         authScreen.classList.add('hide');
         mainApp.classList.remove('hide');
-        
-        // Cập nhật UI
         const displayName = user.displayName || "Thành viên";
         document.getElementById('current-user-name').innerText = "Chào " + displayName;
         document.getElementById('profile-name').innerText = displayName;
         document.getElementById('profile-email').innerText = user.email;
         document.getElementById('profile-avatar').src = `https://ui-avatars.com/api/?name=${displayName}&background=FDBA74&color=fff`;
-
-        // Tải dữ liệu Feed và Chat
         loadPosts();
         loadChat();
       } else {
-        // Chưa đăng nhập
         currentUser = null;
         authScreen.classList.remove('hide');
         mainApp.classList.add('hide');
-        
-        // Reset form
-        authEmail.value = '';
-        authPassword.value = '';
-        authBtn.innerText = isLoginMode ? "Vào nhà ngay" : "Đăng ký thành viên";
       }
     });
 
-    // --- NAVIGATION LOGIC ---
-    const navBtns = document.querySelectorAll('.nav-btn');
-    const sections = ['tab-feed', 'tab-chat', 'tab-profile'];
-
-    navBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // Reset styles
-        navBtns.forEach(b => {
-          b.classList.remove('text-orange-500', 'active');
-          b.classList.add('text-gray-400');
-        });
-        // Set active style
-        btn.classList.add('text-orange-500', 'active');
-        btn.classList.remove('text-gray-400');
-
-        // Show target tab
-        const targetId = btn.getAttribute('data-target');
-        sections.forEach(id => {
-          if(id === targetId) document.getElementById(id).classList.remove('hide');
-          else document.getElementById(id).classList.add('hide');
-        });
+    // Hàm upload ảnh lên ImgBB (Miễn phí 100%)
+    async function uploadToImgBB(file) {
+      const formData = new FormData();
+      formData.append("image", file);
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+        method: "POST",
+        body: formData
       });
-    });
+      const data = await response.json();
+      if (data.success) {
+        return data.data.url;
+      } else {
+        throw new Error("Không thể tải ảnh lên ImgBB");
+      }
+    }
 
-    // --- XỬ LÝ BÀI ĐĂNG (POSTS) ---
+    // Đăng bài
     document.getElementById('btn-post').addEventListener('click', async () => {
       const text = document.getElementById('post-text').value;
       const fileInput = document.getElementById('post-image');
@@ -300,9 +245,11 @@
         let imageUrl = null;
 
         if (file) {
-          const storageRef = ref(storage, 'posts/' + Date.now() + '_' + file.name);
-          await uploadBytes(storageRef, file);
-          imageUrl = await getDownloadURL(storageRef);
+          if (IMGBB_API_KEY === "API_KEY_IMGBB_CỦA_BẠN") {
+            statusText.classList.add('hidden');
+            return alert("Bạn cần dán mã API Key miễn phí từ imgbb.com vào code trước khi up ảnh!");
+          }
+          imageUrl = await uploadToImgBB(file);
         }
 
         await addDoc(collection(db, "posts"), {
@@ -312,7 +259,6 @@
           createdAt: serverTimestamp()
         });
 
-        // Reset form
         document.getElementById('post-text').value = '';
         fileInput.value = '';
         statusText.classList.add('hidden');
@@ -322,22 +268,16 @@
       }
     });
 
-    // Hiển thị Bài đăng theo thời gian thực
     function loadPosts() {
       const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
       onSnapshot(q, (snapshot) => {
         const container = document.getElementById('posts-container');
-        container.innerHTML = ''; // Xóa cũ
-        
+        container.innerHTML = '';
         snapshot.forEach((doc) => {
           const post = doc.data();
           const timeString = post.createdAt ? new Date(post.createdAt.toDate()).toLocaleString('vi-VN') : 'Vừa xong';
+          let imageHTML = post.imageUrl ? `<img src="${post.imageUrl}" class="w-full h-48 object-cover rounded-xl mb-3 mt-2 border border-gray-100">` : '';
           
-          let imageHTML = '';
-          if (post.imageUrl) {
-            imageHTML = `<img src="${post.imageUrl}" class="w-full h-48 object-cover rounded-xl mb-3 mt-2 border border-gray-100" alt="Post image">`;
-          }
-
           const postElement = document.createElement('div');
           postElement.className = 'bg-white p-4 rounded-2xl shadow-sm border border-gray-100';
           postElement.innerHTML = `
@@ -350,23 +290,17 @@
             </div>
             ${post.content ? `<p class="text-gray-700 text-sm mb-2">${post.content}</p>` : ''}
             ${imageHTML}
-            <div class="flex border-t border-gray-50 pt-2 mt-2">
-              <button class="flex items-center space-x-1 text-gray-500 hover:text-red-500 text-sm transition">
-                <i class="fa-regular fa-heart"></i> <span>Thích</span>
-              </button>
-            </div>
           `;
           container.appendChild(postElement);
         });
       });
     }
 
-    // --- XỬ LÝ NHẮN TIN (CHAT) ---
+    // Chat
     document.getElementById('btn-send-chat').addEventListener('click', async () => {
       const input = document.getElementById('chat-input');
       const text = input.value.trim();
       if (!text) return;
-
       input.value = '';
       await addDoc(collection(db, "chats"), {
         text: text,
@@ -376,25 +310,16 @@
       });
     });
 
-    // Cho phép ấn Enter để chat
-    document.getElementById('chat-input').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') document.getElementById('btn-send-chat').click();
-    });
-
-    // Hiển thị Tin nhắn theo thời gian thực
     function loadChat() {
       const q = query(collection(db, "chats"), orderBy("createdAt", "asc"));
       onSnapshot(q, (snapshot) => {
         const container = document.getElementById('chat-messages');
         container.innerHTML = '';
-        
         snapshot.forEach((doc) => {
           const chat = doc.data();
           const isMine = chat.authorId === currentUser.uid;
-          
           const msgDiv = document.createElement('div');
           msgDiv.className = `flex flex-col ${isMine ? 'items-end' : 'items-start'}`;
-          
           msgDiv.innerHTML = `
             <span class="text-[10px] text-gray-400 mb-1 ml-1">${isMine ? 'Bạn' : chat.authorName}</span>
             <div class="max-w-[75%] px-4 py-2 rounded-2xl text-sm ${isMine ? 'bg-orange-400 text-white rounded-br-sm' : 'bg-gray-100 text-gray-800 rounded-bl-sm'}">
@@ -403,10 +328,25 @@
           `;
           container.appendChild(msgDiv);
         });
-        // Tự động cuộn xuống cuối
         container.scrollTop = container.scrollHeight;
       });
     }
+
+    // Navigation
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const sections = ['tab-feed', 'tab-chat', 'tab-profile'];
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navBtns.forEach(b => { b.classList.remove('text-orange-500', 'active'); b.classList.add('text-gray-400'); });
+        btn.classList.add('text-orange-500', 'active');
+        btn.classList.remove('text-gray-400');
+        const targetId = btn.getAttribute('data-target');
+        sections.forEach(id => {
+          if(id === targetId) document.getElementById(id).classList.remove('hide');
+          else document.getElementById(id).classList.add('hide');
+        });
+      });
+    });
   </script>
 </body>
 </html>
